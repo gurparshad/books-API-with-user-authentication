@@ -7,6 +7,7 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   const swaggerConfig = new DocumentBuilder()
   .setTitle('Coding-4-Tomorrow')
@@ -18,6 +19,6 @@ async function bootstrap() {
   const doc = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, doc);
 
-  await app.listen(3002);
+  await app.listen(process.env.PORT || 3002);
 }
 bootstrap();
